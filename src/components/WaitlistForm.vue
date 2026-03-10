@@ -87,6 +87,10 @@
 
     <p class="mt-3 text-center text-xs text-slate-500">Gratis nesta fase. Sem compromisso financeiro.</p>
 
+    <p v-if="errorMessage" class="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+      {{ errorMessage }}
+    </p>
+
     <p v-if="successMessage" class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
       {{ successMessage }}
     </p>
@@ -97,7 +101,7 @@
 import { useWaitlistForm } from "@/composables/useWaitlistForm";
 import type { WaitlistFormData } from "@/types/waitlist";
 
-const { form, errors, isSubmitting, successMessage, setField, submit } = useWaitlistForm();
+const { form, errors, isSubmitting, successMessage, errorMessage, setField, submit } = useWaitlistForm();
 
 async function onSubmit() {
   await submit();
