@@ -53,6 +53,7 @@ export function useWaitlistForm() {
   const errors = reactive<WaitlistFormErrors>({});
   const isSubmitting = ref(false);
   const successMessage = ref("");
+  const errorMessage = ref("");
 
   function clearErrors() {
     Object.keys(errors).forEach((key) => {
@@ -63,13 +64,15 @@ export function useWaitlistForm() {
   function setField<K extends keyof WaitlistFormData>(field: K, value: WaitlistFormData[K]) {
     form[field] = value;
     delete errors[field];
-    if (successMessage.value) {
+    if (successMessage.value || errorMessage.value) {
       successMessage.value = "";
+      errorMessage.value = "";
     }
   }
 
   async function submit(): Promise<boolean> {
     successMessage.value = "";
+    errorMessage.value = "";
     clearErrors();
 
     const validation = validate(form);
@@ -93,6 +96,13 @@ export function useWaitlistForm() {
       clearErrors();
       successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevistas.";
       return true;
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMessage.value = error.message;
+      } else {
+        errorMessage.value = "Não foi possível concluir seu cadastro agora. Tente novamente em instantes.";
+      }
+      return false;
     } finally {
       isSubmitting.value = false;
     }
@@ -103,6 +113,7 @@ export function useWaitlistForm() {
     errors,
     isSubmitting,
     successMessage,
+    errorMessage,
     setField,
     submit
   };
