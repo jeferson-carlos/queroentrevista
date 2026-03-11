@@ -10,10 +10,12 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   dependency-review:
-    if: github.event_name == 'pull_request'
+    # The dependency review action requires public repository or GHAS on private repos.
+    if: github.event_name == 'pull_request' && github.event.repository.private == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
