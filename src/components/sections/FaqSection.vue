@@ -23,24 +23,24 @@ import SectionBlock from "@/components/ui/SectionBlock.vue";
 
 const faqItems = [
   {
-    question: "O Quero Entrevistas já está disponível?",
+    question: "O Quero Entrevista já está disponível?",
     answer: "Ainda não. Estamos abrindo a lista de espera para os primeiros testes."
   },
   {
     question: "Entrar na lista de espera tem custo?",
-    answer: "Não. O cadastro é gratuito nesta fase de validação."
+    answer: "Não. O cadastro é gratuito."
   },
   {
     question: "Vou receber spam?",
-    answer: "Não. Enviamos apenas atualizações relevantes sobre o produto e a abertura dos testes."
+    answer: "Não. Vamos entrar em contato apenas com atualizações importantes sobre o produto."
   },
   {
     question: "Preciso ter LinkedIn?",
-    answer: "Não obrigatoriamente, mas ter um perfil aumenta seu potencial de visibilidade no mercado."
+    answer: "Não obrigatoriamente, mas ter um perfil ajuda bastante no processo."
   },
   {
     question: "É para primeiro emprego ou recolocação?",
-    answer: "Para os dois casos. O produto foi pensado para quem quer aumentar suas chances de ser chamado para entrevistas."
+    answer: "Os dois. O produto foi pensado para quem quer aumentar suas chances de ser chamado para entrevistas."
   }
 ];
 </script>

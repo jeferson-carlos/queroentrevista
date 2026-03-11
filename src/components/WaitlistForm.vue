@@ -6,7 +6,7 @@
     @submit.prevent="onSubmit"
   >
     <div class="mb-5">
-      <h2 class="text-xl font-semibold text-ink">Garanta seu lugar na lista</h2>
+      <h2 class="text-xl font-semibold text-ink">Garanta seu acesso antecipado</h2>
       <p class="mt-1 text-sm text-muted">Leva menos de 1 minuto. Receba convite prioritário para os testes.</p>
     </div>
 
@@ -72,21 +72,6 @@
           {{ errors.currentMoment }}
         </p>
       </div>
-
-      <div>
-        <label for="linkedin" class="mb-1 block text-sm font-medium text-ink">LinkedIn (opcional)</label>
-        <input
-          id="linkedin"
-          type="url"
-          :value="form.linkedin"
-          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-cta focus:ring-4 focus:ring-[var(--focus-ring)]"
-          placeholder="https://linkedin.com/in/seuperfil"
-          :aria-invalid="Boolean(errors.linkedin)"
-          :aria-describedby="errors.linkedin ? 'linkedin-error' : undefined"
-          @input="setField('linkedin', ($event.target as HTMLInputElement).value)"
-        >
-        <p v-if="errors.linkedin" id="linkedin-error" class="mt-1 text-xs text-rose-600">{{ errors.linkedin }}</p>
-      </div>
     </div>
 
     <button
@@ -94,10 +79,10 @@
       :disabled="isSubmitting"
       class="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-cta px-4 py-3 text-sm font-semibold text-white transition hover:bg-cta-hover disabled:cursor-not-allowed disabled:opacity-75"
     >
-      {{ isSubmitting ? "Enviando..." : "Quero minha vaga na lista" }}
+      {{ isSubmitting ? "Enviando..." : "Quero entrar na lista de espera" }}
     </button>
 
-    <p class="mt-3 text-center text-xs text-slate-500">Grátis na fase de testes. Sem spam.</p>
+    <p class="mt-3 text-center text-xs text-slate-500">Grátis na fase inicial. Sem spam.</p>
 
     <p v-if="errorMessage" class="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
       {{ errorMessage }}

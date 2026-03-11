@@ -4,7 +4,7 @@ export type WaitlistSubmitPayload = {
   name: string;
   email: string;
   currentMoment: CurrentMomentOption | "";
-  linkedin: string;
+  linkedin?: string;
 };
 
 export type WaitlistFormData = WaitlistSubmitPayload & {

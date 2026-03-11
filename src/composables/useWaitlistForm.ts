@@ -8,23 +8,11 @@ const MIN_FORM_FILL_TIME_MS = 1200;
 const CLIENT_RATE_LIMIT_MS = 15_000;
 const LAST_SUBMIT_AT_KEY = "qe_waitlist_last_submit_at";
 
-function isValidLinkedInUrl(value: string): boolean {
-  if (!value.trim()) return true;
-
-  try {
-    const parsed = new URL(value.trim());
-    return parsed.hostname.includes("linkedin.com");
-  } catch {
-    return false;
-  }
-}
-
 function createInitialForm(): WaitlistFormData {
   return {
     name: "",
     email: "",
     currentMoment: "",
-    linkedin: "",
     website: ""
   };
 }
@@ -44,10 +32,6 @@ function validate(data: WaitlistFormData): WaitlistFormErrors {
 
   if (!data.currentMoment) {
     errors.currentMoment = "Selecione seu momento atual.";
-  }
-
-  if (!isValidLinkedInUrl(data.linkedin)) {
-    errors.linkedin = "Informe uma URL válida do LinkedIn (linkedin.com).";
   }
 
   return errors;
@@ -110,7 +94,7 @@ export function useWaitlistForm() {
     if (form.website.trim()) {
       Object.assign(form, createInitialForm());
       formStartedAt.value = Date.now();
-      successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevistas.";
+      successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevista.";
       return true;
     }
 
@@ -134,25 +118,21 @@ export function useWaitlistForm() {
     isSubmitting.value = true;
 
     try {
-      const trimmedLinkedin = form.linkedin.trim();
-
       await handleWaitlistSubmit({
         name: form.name.trim(),
         email: form.email.trim(),
-        currentMoment: form.currentMoment,
-        linkedin: trimmedLinkedin
+        currentMoment: form.currentMoment
       });
 
       markSubmitTimestamp();
       trackEvent("waitlist_signup", {
-        current_moment: form.currentMoment,
-        has_linkedin: Boolean(trimmedLinkedin)
+        current_moment: form.currentMoment
       });
 
       Object.assign(form, createInitialForm());
       formStartedAt.value = Date.now();
       clearErrors();
-      successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevistas.";
+      successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevista.";
       return true;
     } catch (error) {
       if (error instanceof Error) {
