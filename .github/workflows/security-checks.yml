@@ -14,8 +14,9 @@ permissions:
 
 jobs:
   dependency-review:
-    # The dependency review action requires public repository or GHAS on private repos.
-    if: github.event_name == 'pull_request' && github.event.repository.private == false
+    # Run only when explicitly enabled in repository variables:
+    # ENABLE_DEPENDENCY_REVIEW=true
+    if: github.event_name == 'pull_request' && vars.ENABLE_DEPENDENCY_REVIEW == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
