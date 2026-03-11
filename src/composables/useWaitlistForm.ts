@@ -1,5 +1,6 @@
 import { reactive, ref } from "vue";
 import { handleWaitlistSubmit } from "@/services/waitlist";
+import { trackEvent } from "@/lib/analytics";
 import type { WaitlistFormData, WaitlistFormErrors } from "@/types/waitlist";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,11 +86,18 @@ export function useWaitlistForm() {
     isSubmitting.value = true;
 
     try {
+      const trimmedLinkedin = form.linkedin.trim();
+
       await handleWaitlistSubmit({
         name: form.name.trim(),
         email: form.email.trim(),
         currentMoment: form.currentMoment,
-        linkedin: form.linkedin.trim()
+        linkedin: trimmedLinkedin
+      });
+
+      trackEvent("waitlist_signup", {
+        current_moment: form.currentMoment,
+        has_linkedin: Boolean(trimmedLinkedin)
       });
 
       Object.assign(form, createInitialForm());
