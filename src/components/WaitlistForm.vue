@@ -97,7 +97,7 @@
       {{ isSubmitting ? "Enviando..." : "Quero minha vaga na lista" }}
     </button>
 
-    <p class="mt-3 text-center text-xs text-slate-500">Grátis nesta fase. Sem compromisso financeiro.</p>
+    <p class="mt-3 text-center text-xs text-slate-500">Grátis na fase de testes. Sem spam.</p>
 
     <p v-if="errorMessage" class="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
       {{ errorMessage }}
