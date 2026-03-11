@@ -26,9 +26,9 @@
 import SectionBlock from "@/components/ui/SectionBlock.vue";
 
 const steps = [
-  "Voce entra na lista de espera",
+  "Você entra na lista de espera",
   "Recebe prioridade quando abrirmos os testes",
-  "Acessa orientacoes praticas para fortalecer seu perfil profissional",
+  "Acessa orientações práticas para fortalecer seu perfil profissional",
   "Aplica os ajustes e aumenta suas chances de conquistar entrevistas"
 ];
 </script>

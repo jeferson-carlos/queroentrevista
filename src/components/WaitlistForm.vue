@@ -7,7 +7,7 @@
   >
     <div class="mb-5">
       <h2 class="text-xl font-semibold text-ink">Garanta seu lugar na lista</h2>
-      <p class="mt-1 text-sm text-muted">Leva menos de 1 minuto. Receba convite prioritario para os testes.</p>
+      <p class="mt-1 text-sm text-muted">Leva menos de 1 minuto. Receba convite prioritário para os testes.</p>
     </div>
 
     <div class="space-y-4">
@@ -33,7 +33,7 @@
           type="email"
           :value="form.email"
           class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink outline-none transition focus:border-cta focus:ring-4 focus:ring-[var(--focus-ring)]"
-          placeholder="voce@email.com"
+          placeholder="seu@email.com"
           :aria-invalid="Boolean(errors.email)"
           :aria-describedby="errors.email ? 'email-error' : undefined"
           @input="setField('email', ($event.target as HTMLInputElement).value)"
@@ -51,9 +51,9 @@
           :aria-describedby="errors.currentMoment ? 'currentMoment-error' : undefined"
           @change="setField('currentMoment', ($event.target as HTMLSelectElement).value as WaitlistFormData['currentMoment'])"
         >
-          <option value="">Selecione uma opcao</option>
+          <option value="">Selecione uma opção</option>
           <option value="primeiro-emprego">Primeiro emprego</option>
-          <option value="recolocacao">Recolocacao</option>
+          <option value="recolocacao">Recolocação</option>
           <option value="troca-empresa">Quero trocar de empresa</option>
         </select>
         <p v-if="errors.currentMoment" id="currentMoment-error" class="mt-1 text-xs text-rose-600">
@@ -85,7 +85,7 @@
       {{ isSubmitting ? "Enviando..." : "Quero minha vaga na lista" }}
     </button>
 
-    <p class="mt-3 text-center text-xs text-slate-500">Gratis nesta fase. Sem compromisso financeiro.</p>
+    <p class="mt-3 text-center text-xs text-slate-500">Grátis nesta fase. Sem compromisso financeiro.</p>
 
     <p v-if="errorMessage" class="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
       {{ errorMessage }}
