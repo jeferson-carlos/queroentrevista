@@ -9,6 +9,13 @@
 2. Rode o SQL do arquivo `supabase/waitlist_setup.sql`.
 3. Confirme se a tabela `public.waitlist_leads` foi criada.
 
+## 2.1) Aplicar hardening de segurança (recomendado)
+1. No `SQL Editor`, rode o arquivo `supabase/waitlist_security_hardening.sql`.
+2. Esse script aplica:
+   - validações adicionais de formato/tamanho no banco
+   - normalização de dados (trim/lowercase) via trigger
+   - proteção básica contra tentativas repetidas em curto intervalo
+
 ## 3) Obter credenciais do projeto
 1. Vá em `Project Settings` > `API Keys`.
 2. Copie:
