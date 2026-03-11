@@ -10,6 +10,18 @@
       <p class="mt-1 text-sm text-muted">Leva menos de 1 minuto. Receba convite prioritário para os testes.</p>
     </div>
 
+    <div class="sr-only" aria-hidden="true">
+      <label for="website">Website</label>
+      <input
+        id="website"
+        type="text"
+        tabindex="-1"
+        autocomplete="off"
+        :value="form.website"
+        @input="setField('website', ($event.target as HTMLInputElement).value)"
+      >
+    </div>
+
     <div class="space-y-4">
       <div>
         <label for="name" class="mb-1 block text-sm font-medium text-ink">Nome*</label>

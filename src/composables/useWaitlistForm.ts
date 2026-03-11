@@ -4,6 +4,9 @@ import { trackEvent } from "@/lib/analytics";
 import type { WaitlistFormData, WaitlistFormErrors } from "@/types/waitlist";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_FORM_FILL_TIME_MS = 1200;
+const CLIENT_RATE_LIMIT_MS = 15_000;
+const LAST_SUBMIT_AT_KEY = "qe_waitlist_last_submit_at";
 
 function isValidLinkedInUrl(value: string): boolean {
   if (!value.trim()) return true;
@@ -21,7 +24,8 @@ function createInitialForm(): WaitlistFormData {
     name: "",
     email: "",
     currentMoment: "",
-    linkedin: ""
+    linkedin: "",
+    website: ""
   };
 }
 
@@ -55,6 +59,33 @@ export function useWaitlistForm() {
   const isSubmitting = ref(false);
   const successMessage = ref("");
   const errorMessage = ref("");
+  const formStartedAt = ref(Date.now());
+
+  function hasRecentSubmit(): boolean {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    const rawValue = window.localStorage.getItem(LAST_SUBMIT_AT_KEY);
+    if (!rawValue) {
+      return false;
+    }
+
+    const lastSubmitAt = Number(rawValue);
+    if (!Number.isFinite(lastSubmitAt)) {
+      return false;
+    }
+
+    return Date.now() - lastSubmitAt < CLIENT_RATE_LIMIT_MS;
+  }
+
+  function markSubmitTimestamp(): void {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.localStorage.setItem(LAST_SUBMIT_AT_KEY, String(Date.now()));
+  }
 
   function clearErrors() {
     Object.keys(errors).forEach((key) => {
@@ -76,6 +107,23 @@ export function useWaitlistForm() {
     errorMessage.value = "";
     clearErrors();
 
+    if (form.website.trim()) {
+      Object.assign(form, createInitialForm());
+      formStartedAt.value = Date.now();
+      successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevistas.";
+      return true;
+    }
+
+    if (Date.now() - formStartedAt.value < MIN_FORM_FILL_TIME_MS) {
+      errorMessage.value = "Aguarde alguns segundos e tente novamente.";
+      return false;
+    }
+
+    if (hasRecentSubmit()) {
+      errorMessage.value = "Recebemos uma tentativa recente. Aguarde alguns segundos para tentar novamente.";
+      return false;
+    }
+
     const validation = validate(form);
     Object.assign(errors, validation);
 
@@ -95,12 +143,14 @@ export function useWaitlistForm() {
         linkedin: trimmedLinkedin
       });
 
+      markSubmitTimestamp();
       trackEvent("waitlist_signup", {
         current_moment: form.currentMoment,
         has_linkedin: Boolean(trimmedLinkedin)
       });
 
       Object.assign(form, createInitialForm());
+      formStartedAt.value = Date.now();
       clearErrors();
       successMessage.value = "Pronto! Você entrou na lista de espera do Quero Entrevistas.";
       return true;
