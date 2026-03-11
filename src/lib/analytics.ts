@@ -11,18 +11,29 @@ declare global {
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim();
 let isAnalyticsReady = false;
 
+function isDebugEnabled(): boolean {
+  return typeof window !== "undefined" && new URLSearchParams(window.location.search).get("ga_debug") === "1";
+}
+
 function ensureGtag(measurementIdValue: string) {
   window.dataLayer = window.dataLayer || [];
-  window.gtag =
-    window.gtag ||
-    ((...args: unknown[]) => {
-      window.dataLayer.push(args);
-    });
+  if (typeof window.gtag !== "function") {
+    window.gtag = function gtag() {
+      // Keep the same queue payload shape used in the official GA snippet.
+      window.dataLayer.push(arguments);
+    } as unknown as Window["gtag"];
+  }
+
+  const config: AnalyticsParams = {
+    anonymize_ip: true
+  };
+
+  if (isDebugEnabled()) {
+    config.debug_mode = true;
+  }
 
   window.gtag("js", new Date());
-  window.gtag("config", measurementIdValue, {
-    anonymize_ip: true
-  });
+  window.gtag("config", measurementIdValue, config);
 }
 
 export function initAnalytics(): void {
@@ -50,5 +61,10 @@ export function trackEvent(eventName: string, params?: AnalyticsParams): void {
     return;
   }
 
-  window.gtag("event", eventName, params || {});
+  const eventParams: AnalyticsParams = { ...(params || {}) };
+  if (isDebugEnabled()) {
+    eventParams.debug_mode = true;
+  }
+
+  window.gtag("event", eventName, eventParams);
 }
