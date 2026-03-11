@@ -22,10 +22,16 @@ Garanta que este commit esteja na branch `main`, porque o workflow publica apena
 2. Clique em `New repository variable` e crie:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_PUBLISHABLE_KEY`
+   - `VITE_GA_MEASUREMENT_ID` (opcional, para Google Analytics)
 
 Use os valores do seu projeto Supabase:
 - `Project URL`
 - `Publishable key` (`sb_publishable_...`)
+
+Se quiser ativar Google Analytics (GA4):
+- Crie uma propriedade no [Google Analytics](https://analytics.google.com/)
+- Copie o `Measurement ID` (formato `G-XXXXXXXXXX`)
+- Use esse valor em `VITE_GA_MEASUREMENT_ID`
 
 ### 4) Disparar o deploy
 Opção A (automática):
