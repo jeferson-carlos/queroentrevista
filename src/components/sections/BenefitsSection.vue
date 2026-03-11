@@ -3,7 +3,7 @@
     <div class="max-w-3xl">
       <h2 class="text-2xl font-semibold text-ink sm:text-3xl">O que o Quero Entrevistas vai te ajudar a melhorar</h2>
       <p class="mt-3 text-base leading-relaxed text-muted">
-        Nao e sobre "encher curriculo". E sobre mostrar valor de forma estrategica para aumentar interesse real.
+        Não é sobre "encher currículo". É sobre mostrar valor de forma estratégica para aumentar interesse real.
       </p>
     </div>
 
@@ -21,8 +21,8 @@ import SectionBlock from "@/components/ui/SectionBlock.vue";
 
 const benefits = [
   {
-    title: "Curriculo mais forte",
-    description: "Transforme experiencias em argumentos de valor que recrutadores entendem rapido."
+    title: "Currículo mais forte",
+    description: "Transforme experiências em argumentos de valor que recrutadores entendem rápido."
   },
   {
     title: "LinkedIn mais atrativo",

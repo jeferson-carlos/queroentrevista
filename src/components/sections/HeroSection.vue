@@ -11,22 +11,22 @@
         </h1>
 
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Pare de se candidatar no escuro. O Quero Entrevistas ajuda voce a identificar o que esta travando suas
-          respostas e ajustar curriculo, LinkedIn e posicionamento para aumentar chamadas para processos seletivos.
+          Pare de se candidatar no escuro. O Quero Entrevistas ajuda você a identificar o que está travando suas
+          respostas e ajustar currículo, LinkedIn e posicionamento para aumentar chamadas para processos seletivos.
         </p>
 
         <ul class="mt-6 space-y-2 text-sm text-slate-700">
           <li class="flex items-start gap-2">
             <span class="mt-0.5 text-blue-700">•</span>
-            <span>Diagnostico objetivo dos pontos que enfraquecem sua candidatura.</span>
+            <span>Diagnóstico objetivo dos pontos que enfraquecem sua candidatura.</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="mt-0.5 text-blue-700">•</span>
-            <span>Ajustes praticos no curriculo e no LinkedIn para gerar mais interesse.</span>
+            <span>Ajustes práticos no currículo e no LinkedIn para gerar mais interesse.</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="mt-0.5 text-blue-700">•</span>
-            <span>Direcionamento mais claro para se candidatar com maior aderencia.</span>
+            <span>Direcionamento mais claro para se candidatar com maior aderência.</span>
           </li>
         </ul>
 
