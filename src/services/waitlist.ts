@@ -8,7 +8,7 @@ export async function handleWaitlistSubmit(payload: WaitlistSubmitPayload): Prom
     name: payload.name,
     email: payload.email.toLowerCase(),
     current_moment: payload.currentMoment,
-    linkedin: payload.linkedin || null,
+    linkedin: payload.linkedin?.trim() || null,
     source: "landing-page"
   });
 
