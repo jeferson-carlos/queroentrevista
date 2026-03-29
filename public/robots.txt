@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://queroentrevista.com.br/sitemap.xml
+Sitemap: https://www.queroentrevista.com.br/sitemap.xml
